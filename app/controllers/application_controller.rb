@@ -5,7 +5,7 @@ before_action :configure_permitted_parameters, if: :devise_controller?
 
 #サインイン・アウト後の遷移先はルートパスがデフォルト。それを変更するのが↓
  def after_sign_in_path_for(resource) #サインイン後にどこに遷移するか設定してるメソッド
-   about_path
+   post_images_path
  end
 
 def after_sign_out_path_for(resource)
