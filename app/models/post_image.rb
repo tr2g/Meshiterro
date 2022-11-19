@@ -1,7 +1,13 @@
 class PostImage < ApplicationRecord
 
+  belongs_to :user #所有されている関係。userに属する。
   has_one_attached :image
-  belongs_to :user
+  has_many :post_comments,dependent: :destroy  #PostCmmentモデルを複数持つ。
+  has_many :favorites, dependent: :destroy
+  
+  validates :shop_name, presence: true
+  validates :image, presence: true
+  
 
   def get_image #PostImageモデルの中に記述することで、メソッドを呼び出す。カラムの呼び出しと同じように。
     #if image.attached?
@@ -18,5 +24,8 @@ class PostImage < ApplicationRecord
     image
   end
 
+def favorited_by?(user)
+  favorites.exists?(user_id: user.id)
+end
 
 end

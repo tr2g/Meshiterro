@@ -1,14 +1,2 @@
-<% @post_images.each do |post_image| %> <!--コントローラーから渡された@post-images変数内から一つずつ取り出して、post_image変数へ格納-->
-<div>
-  <%= link_to post_image_path(post_image.id) do %>
-    <%= image_tag post_image.get_image %> <!--post_imageにActiveStrageで設定したimageを表示している。"post_image.get_image"はPostImageモデル内に記述したメソッドを呼び出している。-->
-  <% end %>
-  <p>投稿ユーザー画像: <%= image_tag post_image.user.get_profile_image(100,100) %></p>
-  <!--1⃣post_image.userで投稿画像に紐づいたユーザーの情報(投稿したのは誰か？)を取得できる-->
-  <!--2⃣.user＝Userモデルを使用しているので、get~メソッドが使えるようになる。-->
-  <!--3⃣post_image.user.get_profile_imageと記述することで、投稿画像に紐づいたユーザーのプロフィール画像を表示できる-->
-  <p>ショップ名: <%= post_image.shop_name %></p>
-  <p>説明: <%= post_image.caption %></p>
-  <p>ユーザーネーム: <%= post_image.user.name %></p>
-</div>
-<% end %>
+<%= render 'list',post_images: @post_images %>
+<!--↑部分テンプレートファイルが同じフォルダ内にあるのでファイル名の省略が可能。-->

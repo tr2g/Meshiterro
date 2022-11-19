@@ -4,10 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :profile_image
   has_many :post_images, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
+  #↑アソシエーションの記述。モデル同士の関連付け。
+  has_many :favorites, dependent: :destroy
 
-has_one_attached :profile_image
-#↑profile_imageという名前で、ActiveStrageでプロフィール画像を保存できるように設定した。
+  has_one_attached :profile_image
+  #↑profile_imageという名前で、ActiveStrageでプロフィール画像を保存できるように設定した。
+
 def get_profile_image(width,height) #←indexで使えるようになるやつ
   unless profile_image.attached? then
     file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
